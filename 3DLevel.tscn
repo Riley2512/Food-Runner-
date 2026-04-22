@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://by8wb56hwrc5u"]
+
+[ext_resource type="PackedScene" uid="uid://bbow7845rirn7" path="res://player.tscn" id="1_wvy5o"]
+[ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="2_d84xi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_wvy5o"]
+sky_material = SubResource("ProceduralSkyMaterial_kfcwk")
+
+[sub_resource type="Environment" id="Environment_d84xi"]
+background_mode = 2
+sky = SubResource("Sky_wvy5o")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kfcwk"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_d84xi"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[node name="Node3D" type="Node3D" unique_id=1845411741]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=952795076]
+environment = SubResource("Environment_d84xi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=580066993]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=443416633]
+transform = Transform3D(16.752361, 0, 0, 0, 5.8954086, 0, 0, 0, 16.40003, -8.806671, 10.566071, -13.651672)
+mesh = SubResource("PlaneMesh_kfcwk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=2046939175]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1453534580]
+shape = SubResource("ConcavePolygonShape3D_d84xi")
+
+[node name="Player" parent="." unique_id=1634934411 instance=ExtResource("1_wvy5o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.91481, 0)
+visible = false
+script = ExtResource("2_d84xi")
+walk_speed = 5.0
+jump_velocity = 4.5
+gravity = 9.8
+mouse_sensitivity = 0.002
+pitch_min = -89.0
+pitch_max = 89.0
