@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://by8wb56hwrc5u"]
 
 [ext_resource type="PackedScene" uid="uid://bbow7845rirn7" path="res://player.tscn" id="1_wvy5o"]
-[ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="2_d84xi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -41,12 +40,3 @@ mesh = SubResource("PlaneMesh_kfcwk")
 shape = SubResource("ConcavePolygonShape3D_d84xi")
 
 [node name="Player" parent="." unique_id=1634934411 instance=ExtResource("1_wvy5o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.91481, 0)
-visible = false
-script = ExtResource("2_d84xi")
-walk_speed = 5.0
-jump_velocity = 4.5
-gravity = 9.8
-mouse_sensitivity = 0.002
-pitch_min = -89.0
-pitch_max = 89.0
