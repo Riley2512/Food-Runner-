@@ -8,8 +8,7 @@ const MOUSE_SENSITIVITY = 0.003
 # Get gravity from project settings
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var camera = $Camera3D
-
+@onready var camera: Camera3D = $Head/FirstPerson
 var is_right_click_held := false
 
 func _ready():

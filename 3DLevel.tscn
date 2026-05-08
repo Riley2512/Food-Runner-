@@ -33,35 +33,21 @@ const MOUSE_SENSITIVITY = 0.003
 
 var gravity: float = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
 
-@onready var camera: Camera3D = $Camera3D
+@onready var camera: Camera3D = $Head/FirstPerson
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
-	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Jump with Spacebar
-	if Input.is_key_pressed(KEY_SPACE) and is_on_floor():
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get movement input
-	var input_dir := Vector2.ZERO
-
-	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP):
-		input_dir.y -= 1
-	if Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN):
-		input_dir.y += 1
-	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
-		input_dir.x -= 1
-	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
-		input_dir.x += 1
-
-	input_dir = input_dir.normalized()
-
-	# Move relative to where the player is facing
+	var input_dir := Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	if direction.length() > 0:
+	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
@@ -71,19 +57,20 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	# Hold right click to look around
-	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		camera.rotation.x = clamp(
+			camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY,
+			deg_to_rad(-89),
+			deg_to_rad(89)
+		)
+
+	# Press Escape to release the mouse
+	if event.is_action_pressed(\"ui_cancel\"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 "
 
-[sub_resource type="Environment" id="Environment_wvy5o"]
-background_mode = 1
-background_color = Color(1, 1, 1, 1)
-
 [node name="Node3D" type="Node3D" unique_id=1937742022]
-transform = Transform3D(1, 0, 0, 0, 0.8292306, 0, 0, 0, 1, 0, -1.0891953, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -108,8 +95,7 @@ shape = SubResource("ConcavePolygonShape3D_wvy5o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -27.95172, 0)
 script = SubResource("GDScript_wvy5o")
 
-[node name="Neck" type="Node3D" parent="." unique_id=1505775033]
+[node name="Neck" type="Node3D" parent="Player" unique_id=1505775033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.95172, 0)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1817325386]
-transform = Transform3D(1, 0, 0, 0, 1.2059371, 0, 0, 0, 1, 0, -24.210215, 0)
-environment = SubResource("Environment_wvy5o")
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=2079347371]
