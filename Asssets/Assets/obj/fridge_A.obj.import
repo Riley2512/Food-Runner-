@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://e81gorji1xgu"
+path="res://.godot/imported/fridge_A.obj-683999761940343d7d1e63a0fa0f5c07.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fridge_A.obj-683999761940343d7d1e63a0fa0f5c07.mesh"]
+
+source_file="res://Asssets/Assets/obj/fridge_A.obj"
+dest_files=["res://.godot/imported/fridge_A.obj-683999761940343d7d1e63a0fa0f5c07.mesh", "res://.godot/imported/fridge_A.obj-683999761940343d7d1e63a0fa0f5c07.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bt6mnygt13bwo"]
+
+[ext_resource type="PackedScene" uid="uid://cvlvbcjkbw2k7" path="res://Asssets/Assets/gltf/floor_kitchen.gltf" id="1_c7s6e"]
+
+[node name="Map" type="Node3D" unique_id=2088233428]
+
+[node name="floor_kitchen2" parent="." unique_id=1895022528 instance=ExtResource("1_c7s6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -490.49097, 826.9139, -256.25015)

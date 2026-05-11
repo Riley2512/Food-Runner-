@@ -16,7 +16,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvy5o"]
-albedo_color = Color(0.18625835, 0.47137558, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kfcwk"]
 size = Vector2(20, 20)
@@ -41,10 +40,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+	if Input.is_action_just_pressed(\"jump\") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	var input_dir := Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
+	var input_dir := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
@@ -70,6 +69,8 @@ func _input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 "
 
+[sub_resource type="PrismMesh" id="PrismMesh_wvy5o"]
+
 [node name="Node3D" type="Node3D" unique_id=1937742022]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
@@ -80,22 +81,27 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1541946106]
-transform = Transform3D(29.357096, 0, 0, 0, 1.1840702, 0, 0, 0, 28.681992, 0.010515213, -29.845137, -0.3864832)
+transform = Transform3D(29.357096, 0, 0, 0, 1.1840702, 0, 0, 0, 28.681992, -30.989487, -66.697, -9.084351)
 material_override = SubResource("StandardMaterial3D_wvy5o")
 mesh = SubResource("PlaneMesh_kfcwk")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=752713373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, -21.534433, 0)
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1711100903]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1514146640]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 9.737278, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=102598763]
 shape = SubResource("ConcavePolygonShape3D_wvy5o")
 
 [node name="Player" parent="." unique_id=1412401694 instance=ExtResource("1_wvy5o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -27.95172, 0)
+transform = Transform3D(0.9999969, -0.0023426986, -0.00078352547, 0.0023405799, 0.9999936, -0.002684913, 0.0007898319, 0.002683065, 0.99999607, 0, -27.95172, 0)
 script = SubResource("GDScript_wvy5o")
 
 [node name="Neck" type="Node3D" parent="Player" unique_id=1505775033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.95172, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=2079347371]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1380218773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.474586, 0)
+mesh = SubResource("PrismMesh_wvy5o")
+
+[node name="GridMap" type="GridMap" parent="." unique_id=264327961]
+transform = Transform3D(29.357096, 0, 0, 0, 1.1840702, 0, 0, 0, 28.681992, -30.989487, -66.697, -9.084351)
