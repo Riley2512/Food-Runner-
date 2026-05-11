@@ -15,8 +15,6 @@ sky = SubResource("Sky_wvy5o")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvy5o"]
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_kfcwk"]
 size = Vector2(20, 20)
 
@@ -82,7 +80,6 @@ shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1541946106]
 transform = Transform3D(29.357096, 0, 0, 0, 1.1840702, 0, 0, 0, 28.681992, -30.989487, -66.697, -9.084351)
-material_override = SubResource("StandardMaterial3D_wvy5o")
 mesh = SubResource("PlaneMesh_kfcwk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=1711100903]
