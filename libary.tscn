@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dev0q5265atr4"]
+
+[ext_resource type="PackedScene" uid="uid://cvlvbcjkbw2k7" path="res://Asssets/Assets/gltf/floor_kitchen.gltf" id="1_p1av4"]
+
+[node name="libary" type="Node3D" unique_id=789535274]
+
+[node name="floor_kitchen5" parent="." unique_id=1895022528 instance=ExtResource("1_p1av4")]
+transform = Transform3D(8.924139, 0, 0, 0, 1, 0, 0, 0, 9.50992, -4.452858, 0, -3.430277)
+
+[node name="floor_kitchen6" parent="." unique_id=1114852300 instance=ExtResource("1_p1av4")]
+transform = Transform3D(8.924139, 0, 0, 0, 1, 0, 0, 0, 9.50992, -4.452858, -0.060875893, 34.48653)
+
+[node name="floor_kitchen7" parent="." unique_id=423653161 instance=ExtResource("1_p1av4")]
+transform = Transform3D(8.924139, 0, 0, 0, 1, 0, 0, 0, 9.50992, 30.759926, 0.32072353, -3.1745453)
+
+[node name="floor_kitchen8" parent="." unique_id=295831794 instance=ExtResource("1_p1av4")]
+transform = Transform3D(8.924139, 0, 0, 0, 1, 0, 0, 0, 9.50992, 31.511501, -0.060875893, 34.48653)
+
+[node name="floor_kitchen9" parent="." unique_id=860356999 instance=ExtResource("1_p1av4")]
+transform = Transform3D(8.924139, 0, 0, 0, 1, 0, 0, 0, 9.50992, -40.632652, -0.060875893, -4.251171)
+
+[node name="floor_kitchen10" parent="." unique_id=679498636 instance=ExtResource("1_p1av4")]
+transform = Transform3D(8.924139, 0, 0, 0, 1, 0, 0, 0, 9.50992, -39.994404, -0.060875893, 34.48653)
