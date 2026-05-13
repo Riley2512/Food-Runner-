@@ -1,10 +1,16 @@
 extends CharacterBody3D
-
+@onready var first_person_camera: Camera3D = $FirstPersonCamera
+@onready var third_person_camera: Node3D = $ThirdPersonCamera
 # Movement settings
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.003
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("shift"):
+		_change_camera()
+
+		
 # Get gravity from project settings
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -15,22 +21,7 @@ func _ready():
 	# Keep mouse visible until right click is held
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _input(event):
-	# Right click to look around
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-		is_right_click_held = event.pressed
-		if is_right_click_held:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-	# Mouse look (only when right click held)
-	if event is InputEventMouseMotion and is_right_click_held:
-		# Rotate player left/right (yaw)
-		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-		# Rotate camera up/down (pitch), clamped to avoid flipping
-		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 func _physics_process(delta):
 	# Apply gravity
@@ -71,3 +62,8 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+func _get_camera_transform():
+	if first_person_camera.current:
+		return first_person_camera.global_transform.basis
+	else:
+			return third_person_camera.global_transform.basis

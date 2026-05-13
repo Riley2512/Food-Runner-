@@ -6,6 +6,54 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ra883"]
 
+[sub_resource type="GDScript" id="GDScript_xhfnw"]
+script/source = "extends Camera3D
+
+@export var enable := false:
+    set(value):
+        enable = value
+        current = value
+
+const CAMERA_SENS = 0.003
+
+func _ready():
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _input(event):
+    if event.is_action_pressed(\"ui_cancel\"): get_tree().quit()
+
+    if event is InputEventMouseMotion:
+        rotation.y -= event.relative.x * CAMERA_SENS
+        rotation.x -= event.relative.y * CAMERA_SENS
+        rotation.x = clamp(rotation.x, -0.5, 1.2)
+"
+
+[sub_resource type="GDScript" id="GDScript_kpjcp"]
+script/source = "extends Node3D
+
+@export var enable := false:
+    set(value):
+        enable = value
+        if not Engine.is_editor_hint():
+            %Camera3D.current = value
+
+@export var camera_sens = 0.003
+@export var cameraLimitDeg = 40
+
+func _input(event):
+    if event.is_action_pressed(\"ui_cancel\"): get_tree().quit()
+
+    _camera_control(event)
+
+func _camera_control(event):
+    if event is InputEventMouseMotion:
+        rotation.y -= event.relative.x * camera_sens
+
+        rotation.x -= event.relative.y * camera_sens
+        var limitRadians = deg_to_rad(cameraLimitDeg)
+        rotation.x = clampf(rotation.x, -limitRadians, limitRadians)
+"
+
 [node name="Player" type="CharacterBody3D" unique_id=1412401694]
 script = ExtResource("1_xhfnw")
 
@@ -19,5 +67,10 @@ shape = SubResource("CapsuleShape3D_ra883")
 
 [node name="Head" type="Node3D" parent="." unique_id=1362488876]
 
-[node name="FirstPerson" type="Camera3D" parent="Head" unique_id=942148369]
+[node name="FirstPersonCamera" type="Camera3D" parent="Head" unique_id=942148369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.117115, 0.034838676)
+script = SubResource("GDScript_xhfnw")
+
+[node name="ThirdPersonCamera" type="Node3D" parent="Head/FirstPersonCamera" unique_id=922118220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.117115, -0.034838676)
+script = SubResource("GDScript_kpjcp")
