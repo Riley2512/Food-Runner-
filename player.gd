@@ -10,6 +10,18 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shift"):
 		_change_camera()
 
+func _change_camera():
+	if first_person_camera.current:
+		first_person_camera.enable = false
+		third_person_camera.enable = true
+	else:
+		first_person_camera.enable = true
+		third_person_camera.enable = false
+	
+
+
+	
+
 		
 # Get gravity from project settings
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
