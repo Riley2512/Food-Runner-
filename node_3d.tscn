@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://by8wb56hwrc5u"]
+[gd_scene format=3 uid="uid://bdp0yn08amij0"]
 
-[ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://Player.tscn" id="1_wvy5o"]
+[ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://Player.tscn" id="1_a202f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 
 [sub_resource type="PrismMesh" id="PrismMesh_wvy5o"]
 
-[node name="Node3D" type="Node3D" unique_id=1937742022]
+[node name="World" type="Node3D" unique_id=1937742022]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -77,7 +77,7 @@ mesh = SubResource("PlaneMesh_kfcwk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=102598763]
 shape = SubResource("ConcavePolygonShape3D_wvy5o")
 
-[node name="Player" parent="." unique_id=1412401694 instance=ExtResource("1_wvy5o")]
+[node name="Player" parent="." unique_id=1412401694 instance=ExtResource("1_a202f")]
 transform = Transform3D(0.9999969, -0.0023426986, -0.00078352547, 0.0023405799, 0.9999936, -0.002684913, 0.0007898319, 0.002683065, 0.99999607, 0, -8.818602, 0)
 script = SubResource("GDScript_wvy5o")
 

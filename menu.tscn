@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://by8wb56hwrc5u"]
+[gd_scene format=3 uid="uid://bd73b8gh51pqo"]
 
-[ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://Player.tscn" id="1_wvy5o"]
+[ext_resource type="Script" uid="uid://bg530iamcbnu5" path="res://v_box_container.gd" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://dtli3pjppqbq7" path="res://menu.gd" id="1_ouk20"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,42 +24,10 @@ size = Vector2(20, 20)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wvy5o"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
-[sub_resource type="GDScript" id="GDScript_wvy5o"]
-script/source = "extends CharacterBody3D
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const MOUSE_SENSITIVITY = 0.003
-
-var gravity: float = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
-
-@onready var camera: Camera3D = $Head/FirstPerson
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	if Input.is_action_just_pressed(\"jump\") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var input_dir := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
-"
-
 [sub_resource type="PrismMesh" id="PrismMesh_wvy5o"]
 
 [node name="Node3D" type="Node3D" unique_id=1937742022]
+script = ExtResource("1_ouk20")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -77,18 +46,43 @@ mesh = SubResource("PlaneMesh_kfcwk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=102598763]
 shape = SubResource("ConcavePolygonShape3D_wvy5o")
 
-[node name="Player" parent="." unique_id=1412401694 instance=ExtResource("1_wvy5o")]
-transform = Transform3D(0.9999969, -0.0023426986, -0.00078352547, 0.0023405799, 0.9999936, -0.002684913, 0.0007898319, 0.002683065, 0.99999607, 0, -8.818602, 0)
-script = SubResource("GDScript_wvy5o")
-
-[node name="Neck" type="Node3D" parent="Player" unique_id=1505775033]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.95172, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=2079347371]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1380218773]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.474586, 0)
 mesh = SubResource("PrismMesh_wvy5o")
 
 [node name="GridMap" type="GridMap" parent="." unique_id=884494972]
 metadata/_editor_floor_ = Vector3(0, 4, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1628469087]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.5
+offset_top = -50.5
+offset_right = 66.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lti8b")
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer" unique_id=122503254]
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadButton" type="Button" parent="VBoxContainer" unique_id=258131252]
+layout_mode = 2
+text = "Load"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1498731494]
+layout_mode = 2
+text = "Quit"
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=402828967]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1937364762]
+transform = Transform3D(-4.371139e-08, 0.25881907, 0.9659258, 0, 0.9659259, -0.25881907, -1, -1.1313341e-08, -4.222196e-08, 532.12866, -3.903122, -34.06656)
+
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="VBoxContainer" method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="VBoxContainer" method="_on_quit_button_pressed"]
