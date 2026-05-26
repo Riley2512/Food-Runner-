@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bdp0yn08amij0"]
 
 [ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://Player.tscn" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://bd73b8gh51pqo" path="res://menu.tscn" id="2_r3fl7"]
+[ext_resource type="Script" uid="uid://cgphpymq6tfxr" path="res://pause_menu.gd" id="3_jka67"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -92,3 +94,6 @@ mesh = SubResource("PrismMesh_wvy5o")
 
 [node name="GridMap" type="GridMap" parent="." unique_id=884494972]
 metadata/_editor_floor_ = Vector3(0, 4, 0)
+
+[node name="Node3D" parent="GridMap" unique_id=144042345 instance=ExtResource("2_r3fl7")]
+script = ExtResource("3_jka67")

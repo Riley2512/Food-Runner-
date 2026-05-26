@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dujhadqchmrkt"]
+
+[ext_resource type="Shader" uid="uid://31w4dxxit0bm" path="res://new_shader.gdshader" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://cgphpymq6tfxr" path="res://pause_menu.gd" id="1_nwcfo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
+shader = ExtResource("1_hdmo1")
+
+[sub_resource type="Animation" id="Animation_05uyy"]
+resource_name = "blur"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p81d2"]
+_data = {
+&"blur": SubResource("Animation_05uyy")
+}
+
+[node name="PauseMenu" type="Control" unique_id=1294053202]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nwcfo")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=572049038]
+material = SubResource("ShaderMaterial_nwcfo")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -489.0
+offset_top = -115.0
+offset_right = 436.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1615528230]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1208469595]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1643244435]
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer" unique_id=2051436796]
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer" unique_id=374352385]
+process_mode = 3
+layout_mode = 2
+text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1079021437]
+libraries/ = SubResource("AnimationLibrary_p81d2")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
