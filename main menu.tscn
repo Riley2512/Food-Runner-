@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://dp2euqt0v4hfr"]
+[gd_scene format=3 uid="uid://xwk7drro2y2q"]
 
-[ext_resource type="Texture2D" uid="uid://dmu8b3fhcb4u7" path="res://Asssets/Assets/gltf/2021.09.10-14.06_02.png" id="1_0xm2m"]
-[ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dmu8b3fhcb4u7" path="res://Asssets/Assets/gltf/2021.09.10-14.06_02.png" id="1_bajiw"]
+[ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="2_f0j1r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1bvp3"]
-texture = ExtResource("1_0xm2m")
+texture = ExtResource("1_bajiw")
 modulate_color = Color(0.29219002, 0.29219005, 0.29219002, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
@@ -81,12 +81,12 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 361.0
+offset_left = 356.0
 offset_top = 171.0
-offset_right = 844.0
+offset_right = 839.0
 offset_bottom = 267.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_fonts/font = ExtResource("2_f0j1r")
 theme_override_font_sizes/font_size = 61
 text = "Food Runner"
