@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://by8wb56hwrc5u"]
 
 [ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://Player.tscn" id="1_wvy5o"]
+[ext_resource type="PackedScene" uid="uid://dwkppxpgb7eqc" path="res://enmey.tscn" id="3_0d8h1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -90,5 +91,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.95172, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.474586, 0)
 mesh = SubResource("PrismMesh_wvy5o")
 
-[node name="GridMap" type="GridMap" parent="." unique_id=884494972]
-metadata/_editor_floor_ = Vector3(0, 4, 0)
+[node name="Enmey" parent="." unique_id=2145365595 instance=ExtResource("3_0d8h1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 95, -24)

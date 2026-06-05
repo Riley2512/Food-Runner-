@@ -1,18 +1,29 @@
 [gd_scene format=3 uid="uid://xwk7drro2y2q"]
 
 [ext_resource type="Texture2D" uid="uid://dmu8b3fhcb4u7" path="res://Asssets/Assets/gltf/2021.09.10-14.06_02.png" id="1_bajiw"]
+[ext_resource type="Script" uid="uid://dvlldcvvngncn" path="res://main_menu.gd" id="1_f0j1r"]
 [ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="2_f0j1r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1bvp3"]
 texture = ExtResource("1_bajiw")
 modulate_color = Color(0.29219002, 0.29219005, 0.29219002, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
-bg_color = Color(18.712564, 18.712564, 18.712564, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqwyt"]
+bg_color = Color(1.6348723, 1.634871, 1.6348717, 1)
 
-[node name="Node3D" type="Control" unique_id=1045908022]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bajiw"]
+bg_color = Color(0.7162962, 0.71629626, 0.7162961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0j1r"]
+bg_color = Color(1.332106, 1.3980215, 1.4206674, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
+bg_color = Color(1.6348723, 1.634871, 1.6348717, 1)
+
+[node name="Main menu" type="Control" unique_id=1045908022]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_f0j1r")
 
 [node name="Panel" type="Panel" parent="." unique_id=100583628]
 layout_mode = 1
@@ -29,7 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_1bvp3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=172363605]
+[node name="Main buttons" type="VBoxContainer" parent="." unique_id=172363605]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,17 +55,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1907429956]
+[node name="Button" type="Button" parent="Main buttons" unique_id=1907429956]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qqwyt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bajiw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f0j1r")
 text = "Start Game"
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1630116381]
+[node name="Button2" type="Button" parent="Main buttons" unique_id=1630116381]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -64,7 +75,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
 text = "Options"
 
-[node name="Button3" type="Button" parent="VBoxContainer" unique_id=409404664]
+[node name="Button3" type="Button" parent="Main buttons" unique_id=409404664]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -90,3 +101,7 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_f0j1r")
 theme_override_font_sizes/font_size = 61
 text = "Food Runner"
+
+[connection signal="pressed" from="Main buttons/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Main buttons/Button2" to="." method="_on_settings_2_pressed"]
+[connection signal="pressed" from="Main buttons/Button3" to="." method="_on_exit_pressed"]
