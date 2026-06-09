@@ -1,16 +1,25 @@
 extends CharacterBody3D
 
-@onready var nav_agent = $NavigationAgent3D
+@onready var MoveSpeed:float = 4.0
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 
-var SPEED = 3.0
+var player: CharacterBody3D = null
 
-func _physics_process(delta):
-	var current_loacation = global_transform.origin
-	var next_loacation = nav_agent.get_next_path_position()
-	var new_velocity = (next_loacation - current_loacation).normalized() * SPEED
+func _ready() -> void:
+	await get_tree().process_frame
+	var players = get_tree().get_nodes_in_group("Player")
+	if players.size() > 0:
+		player = players[0]
+	else:
+		push_error("no node found in group  'player'")
+func _physics_process(delta : float) -> void:
+	if player == null:
+		return
 
-	velocity = new_velocity
+	navigation_agent.set_target_position(player.global_position)
+	
+	if navigation_agent.is_navigation_finished():
+		return
+	var next_position: Vector3 = navigation_agent.get_next_path_position()
+	velocity = (next_position - global_position).normalized() * MoveSpeed
 	move_and_slide()
-
-func update_target_location(target_loactaion):
-	nav_agent.set_target_position(target_loactaion)
