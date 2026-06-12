@@ -13,6 +13,7 @@ config_version=5
 config/name="Food Runner"
 run/main_scene="uid://by8wb56hwrc5u"
 config/features=PackedStringArray("4.6", "Forward Plus")
+run/load_shell_environment=true
 config/icon="res://icon.svg"
 
 [input]
