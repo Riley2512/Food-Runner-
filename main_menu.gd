@@ -1,6 +1,8 @@
 extends Control
 
 @onready var main_buttons: VBoxContainer = $"Main buttons"
+@onready var options: Panel = $Options
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +20,8 @@ func _on_start_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	print("Settings pressed")
+	main_buttons.visible = false
+	options.visible
 
 
 func _on_exit_pressed() -> void:
