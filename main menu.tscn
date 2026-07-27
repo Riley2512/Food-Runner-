@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dmu8b3fhcb4u7" path="res://Asssets/Assets/gltf/2021.09.10-14.06_02.png" id="1_bajiw"]
 [ext_resource type="Script" uid="uid://dvlldcvvngncn" path="res://main_menu.gd" id="1_f0j1r"]
 [ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="2_f0j1r"]
+[ext_resource type="Script" uid="uid://bnesgv2yccqep" path="res://button.gd" id="3_qqwyt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1bvp3"]
 texture = ExtResource("1_bajiw")
@@ -64,6 +65,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qqwyt")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bajiw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f0j1r")
 text = "Start Game"
+script = ExtResource("3_qqwyt")
 
 [node name="Button2" type="Button" parent="Main buttons" unique_id=1630116381]
 layout_mode = 2
@@ -123,6 +125,21 @@ offset_bottom = 122.0
 theme_override_font_sizes/font_size = 32
 text = "Options"
 
+[node name="back" type="Button" parent="Options/Label" unique_id=510967296]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 200.0
+offset_right = 375.0
+offset_bottom = 242.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
+text = "Back"
+
 [connection signal="pressed" from="Main buttons/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Main buttons/Button2" to="." method="_on_settings_2_pressed"]
 [connection signal="pressed" from="Main buttons/Button3" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Options/Label/back" to="." method="_on_back_pressed"]
