@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://xwk7drro2y2q"]
+[gd_scene format=3 uid="uid://rjlsis2fioo2"]
 
-[ext_resource type="Texture2D" uid="uid://dmu8b3fhcb4u7" path="res://Asssets/Assets/gltf/2021.09.10-14.06_02.png" id="1_bajiw"]
-[ext_resource type="Script" uid="uid://dvlldcvvngncn" path="res://main_menu.gd" id="1_f0j1r"]
-[ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="2_f0j1r"]
-[ext_resource type="Script" uid="uid://bnesgv2yccqep" path="res://button.gd" id="3_qqwyt"]
+[ext_resource type="Script" uid="uid://dvlldcvvngncn" path="res://main_menu.gd" id="1_lt4la"]
+[ext_resource type="Texture2D" uid="uid://dmu8b3fhcb4u7" path="res://Asssets/Assets/gltf/2021.09.10-14.06_02.png" id="2_4amfo"]
+[ext_resource type="Script" uid="uid://bnesgv2yccqep" path="res://button.gd" id="3_2kp8h"]
+[ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="4_lj86r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1bvp3"]
-texture = ExtResource("1_bajiw")
+texture = ExtResource("2_4amfo")
 modulate_color = Color(0.29219002, 0.29219005, 0.29219002, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqwyt"]
@@ -24,7 +24,7 @@ bg_color = Color(1.6348723, 1.634871, 1.6348717, 1)
 [node name="Main menu" type="Control" unique_id=1045908022]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_f0j1r")
+script = ExtResource("1_lt4la")
 
 [node name="Background" type="Panel" parent="." unique_id=100583628]
 layout_mode = 1
@@ -65,7 +65,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qqwyt")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bajiw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f0j1r")
 text = "Start Game"
-script = ExtResource("3_qqwyt")
+script = ExtResource("3_2kp8h")
 metadata/_custom_type_script = "uid://bnesgv2yccqep"
 
 [node name="Button2" type="Button" parent="Main buttons" unique_id=1630116381]
@@ -77,6 +77,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
 text = "Options"
+script = ExtResource("3_2kp8h")
 
 [node name="Button3" type="Button" parent="Main buttons" unique_id=409404664]
 layout_mode = 2
@@ -87,6 +88,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
 text = "Exit"
+script = ExtResource("3_2kp8h")
 
 [node name="Label" type="Label" parent="." unique_id=431882814]
 layout_mode = 1
@@ -101,7 +103,7 @@ offset_right = 839.0
 offset_bottom = 267.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_f0j1r")
+theme_override_fonts/font = ExtResource("4_lj86r")
 theme_override_font_sizes/font_size = 61
 text = "Food Runner"
 
@@ -139,6 +141,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
 text = "Back"
+script = ExtResource("3_2kp8h")
 
 [connection signal="pressed" from="Main buttons/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Main buttons/Button2" to="." method="_on_settings_2_pressed"]

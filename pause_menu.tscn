@@ -2,17 +2,14 @@
 
 [ext_resource type="Shader" uid="uid://31w4dxxit0bm" path="res://new_shader.gdshader" id="1_hdmo1"]
 [ext_resource type="Script" uid="uid://cgphpymq6tfxr" path="res://pause_menu.gd" id="1_nwcfo"]
+[ext_resource type="Script" uid="uid://bnesgv2yccqep" path="res://button.gd" id="3_05uyy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcfo"]
+render_priority = 0
 shader = ExtResource("1_hdmo1")
 
-[sub_resource type="Animation" id="Animation_05uyy"]
-resource_name = "blur"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p81d2"]
-_data = {
-&"blur": SubResource("Animation_05uyy")
-}
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="PauseMenu" type="Control" unique_id=1294053202]
 process_mode = 3
@@ -38,7 +35,7 @@ offset_right = 436.0
 offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.446777, 0.44677705, 0.44677705, 1)
+color = Color(0.44705883, 0.44705883, 0.44705883, 0)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1615528230]
 layout_mode = 1
@@ -53,25 +50,31 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1208469595]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1643244435]
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1003224847]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-500, 0)
 text = "Resume"
+script = ExtResource("3_05uyy")
+metadata/_custom_type_script = "uid://bnesgv2yccqep"
 
-[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer" unique_id=2051436796]
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer" unique_id=387220002]
 layout_mode = 2
 text = "Restart"
+script = ExtResource("3_05uyy")
+metadata/_custom_type_script = "uid://bnesgv2yccqep"
 
-[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer" unique_id=374352385]
+[node name="Quit" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1377668359]
 process_mode = 3
 layout_mode = 2
 text = "Quit"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1079021437]
-libraries/ = SubResource("AnimationLibrary_p81d2")
+script = ExtResource("3_05uyy")
+metadata/_custom_type_script = "uid://bnesgv2yccqep"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
