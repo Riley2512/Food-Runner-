@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b6l3avbtelof"]
+
+[ext_resource type="Script" uid="uid://bb7falj4kmnul" path="res://enmey_spawner.gd" id="1_veo8q"]
+
+[node name="EnmeySpawner" type="Node3D" unique_id=1949282976]
+script = ExtResource("1_veo8q")
+enemies = null
+nextWaveTime = null
+enmemiesPerWave = null
+maxWaves = null
+
+[node name="Timer" type="Timer" parent="." unique_id=712492218]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
