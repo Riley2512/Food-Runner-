@@ -4,10 +4,6 @@
 
 [node name="EnmeySpawner" type="Node3D" unique_id=1949282976]
 script = ExtResource("1_veo8q")
-enemies = null
-nextWaveTime = null
-enmemiesPerWave = null
-maxWaves = null
 
 [node name="Timer" type="Timer" parent="." unique_id=712492218]
 
