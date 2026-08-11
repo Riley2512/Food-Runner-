@@ -117,7 +117,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.778358, 0)
 script = SubResource("GDScript_ae27s")
 
 [node name="Play_Spawner" parent="." unique_id=940329098 instance=ExtResource("4_0d8h1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.338062, -66.75136, -1.8134766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.338062, -41.065765, -1.8134766)
 
 [node name="EnmeySpawner" parent="." unique_id=1949282976 instance=ExtResource("5_ialqo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -44.099674, 0)
@@ -129,7 +129,7 @@ shape = SubResource("CylinderShape3D_yf5fn")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="EnmeySpawner/CollisionShape3D" unique_id=547010581]
 
-[node name="ProgressBar" type="ProgressBar" parent="EnmeySpawner/CollisionShape3D/CanvasLayer" unique_id=2034668836]
+[node name="Health bar" type="ProgressBar" parent="EnmeySpawner/CollisionShape3D/CanvasLayer" unique_id=2034668836]
 offset_right = 223.0
 offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")

@@ -1,48 +1,27 @@
 [gd_scene format=3 uid="uid://gm5unbfsq4m"]
 
 [ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="2_onrkg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ra883"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4flbx"]
-bg_color = Color(1, 0.30401003, 0.3919419, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
-expand_margin_left = 3.0
-expand_margin_top = 3.0
-expand_margin_right = 3.0
-expand_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onrkg"]
-bg_color = Color(0.22483963, 0.823534, 0, 1)
-
 [node name="Player" type="CharacterBody3D" unique_id=1412401694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31059027, 0)
 script = ExtResource("1_xhfnw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=43763563]
-transform = Transform3D(2.1000843, 0, 0, 0, 3.257844, 0, 0, 0, 2.7592766, 0, 7.2250633, 0)
+transform = Transform3D(2.1000843, 0, 0, 0, 3.257844, 0, 0, 0, 2.7592766, 0, -0.043664932, 0)
 mesh = SubResource("CapsuleMesh_kpjcp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1727370997]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4659758, 0)
+transform = Transform3D(4.276107, 0, 0, 0, 3.0349197, 0, 0, 0, 3.5679193, 0, 0.15849876, 0)
 shape = SubResource("CapsuleShape3D_ra883")
 
-[node name="Node3D" type="Node3D" parent="." unique_id=1052319189]
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=538770569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7991385, -1.4001338)
+script = ExtResource("2_onrkg")
+mouse_sensibilty = null
 
-[node name="SpringArm3D" type="SpringArm3D" parent="Node3D" unique_id=1527807593]
-spring_length = 4.0
-
-[node name="Camera3D" type="Camera3D" parent="Node3D/SpringArm3D" unique_id=1294688681]
-
-[node name="ProgressBar" type="ProgressBar" parent="Node3D/SpringArm3D/Camera3D" unique_id=2010005759]
-offset_right = 223.0
-offset_bottom = 27.0
-theme_override_styles/background = SubResource("StyleBoxFlat_4flbx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_onrkg")
-value = 100.0
-metadata/_edit_use_anchors_ = true
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1582987903]

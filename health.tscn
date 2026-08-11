@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c8x4n841a1ah6"]
+
+[ext_resource type="Script" uid="uid://bv7qm4ux1snvu" path="res://health.gd" id="1_bydfv"]
+[ext_resource type="ArrayMesh" uid="uid://cch4t54jx1c2j" path="res://Asssets/Assets/obj/food_burger.obj" id="2_7e838"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+
+[node name="health" type="Area3D" unique_id=317404163]
+script = ExtResource("1_bydfv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1449340406]
+mesh = ExtResource("2_7e838")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=522746091]
+transform = Transform3D(1.2170049, 0, 0, 0, 1.2518818, 0, 0, 0, 0.8791321, 0, 0.30788326, 0)
+shape = SubResource("SphereShape3D_g4v7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

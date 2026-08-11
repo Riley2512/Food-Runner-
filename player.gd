@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var camera: Camera3D = $FirstPersonCamera
+@onready var camera: Camera3D = $Node3D/SpringArm3D/Camera3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -25,12 +25,14 @@ func _input(event: InputEvent) -> void:
 			camera_pitch - event.relative.y * MOUSE_SENSITIVITY,
 			deg_to_rad(-80), deg_to_rad(80)
 		)
+		$Node3D.rotation.x = camera_pitch
 
 func _physics_process(delta: float) -> void:
-	# Apply camera pitch every frame
-
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	else:
+		velocity.y = -0.1  # keeps player grounded, prevents floor-detection jitter
+
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
@@ -42,4 +44,5 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta * 60)
 		velocity.z = move_toward(velocity.z, 0, SPEED * delta * 60)
+
 	move_and_slide()
