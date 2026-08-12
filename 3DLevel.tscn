@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://by8wb56hwrc5u"]
 
 [ext_resource type="Script" uid="uid://d32g5j3sb4mtg" path="res://3d_level.gd" id="1_ra883"]
-[ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://player.tscn" id="1_wvy5o"]
 [ext_resource type="PackedScene" uid="uid://dwkppxpgb7eqc" path="res://enmey.tscn" id="3_0d8h1"]
 [ext_resource type="PackedScene" uid="uid://cnu4sqhpp4lqp" path="res://play_spawner.tscn" id="4_0d8h1"]
 [ext_resource type="PackedScene" uid="uid://b6l3avbtelof" path="res://enmey_spawner.tscn" id="5_ialqo"]
@@ -31,37 +30,6 @@ data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0,
 
 [sub_resource type="PrismMesh" id="PrismMesh_wvy5o"]
 
-[sub_resource type="GDScript" id="GDScript_ae27s"]
-script/source = "extends CharacterBody3D
-
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
-
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
-"
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yf5fn"]
 height = 15.113647
 radius = 16.274414
@@ -80,6 +48,16 @@ expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
 bg_color = Color(0.22483963, 0.823534, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4v7s"]
+albedo_color = Color(0.45490196, 0.8509804, 0.47843137, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_g4v7s")
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
 [node name="Node3D" type="Node3D" unique_id=1937742022]
 script = ExtResource("1_ra883")
@@ -112,10 +90,6 @@ transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, -5.17
 
 [node name="Area3D" type="Area3D" parent="Enmey" unique_id=1707365375]
 
-[node name="Player" parent="." unique_id=1412401694 groups=["enmey"] instance=ExtResource("1_wvy5o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.778358, 0)
-script = SubResource("GDScript_ae27s")
-
 [node name="Play_Spawner" parent="." unique_id=940329098 instance=ExtResource("4_0d8h1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.338062, -41.065765, -1.8134766)
 
@@ -139,5 +113,25 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="." unique_id=26013020]
 one_shot = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=989918913]
+
+[node name="Bodymesh" type="MeshInstance3D" parent="Player" unique_id=1037357154]
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Bodymesh" unique_id=281295177]
+transform = Transform3D(0.30631986, 0, 0, 0, 0.31903988, 0, 0, 0, 0.17573826, -0.21703705, 0.5854084, 0.5536573)
+mesh = SubResource("SphereMesh_g4v7s")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Bodymesh" unique_id=179816584]
+transform = Transform3D(0.30631986, 0, 0, 0, 0.31903988, 0, 0, 0, 0.17573826, 0.15234852, 0.5854084, 0.5536573)
+mesh = SubResource("SphereMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=87020633]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="CamOrigin" type="Node3D" parent="Player" unique_id=1216218170]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/CamOrigin" unique_id=609205234]
 
 [connection signal="body_entered" from="Enmey/Area3D" to="Enmey" method="_on_area_3d_body_entered"]

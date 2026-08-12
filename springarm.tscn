@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://gm5unbfsq4m"]
+[gd_scene format=3 uid="uid://dk7dq51ixet87"]
 
-[ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="1_xhfnw"]
-[ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="1_ri56e"]
+[ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="2_juapp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
 
@@ -9,7 +9,7 @@
 
 [node name="Player" type="CharacterBody3D" unique_id=1412401694]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31059027, 0)
-script = ExtResource("1_xhfnw")
+script = ExtResource("1_ri56e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=43763563]
 transform = Transform3D(2.1000843, 0, 0, 0, 3.257844, 0, 0, 0, 2.7592766, 0, -0.043664932, 0)
@@ -23,8 +23,7 @@ shape = SubResource("CapsuleShape3D_ra883")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0464933, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivort" unique_id=538770569]
-script = ExtResource("2_onrkg")
-mouse_sensibilty = null
+script = ExtResource("2_juapp")
 
 [node name="SpringPossition" type="Node3D" parent="SpringArmPivort/SpringArm3D" unique_id=316026420]
 

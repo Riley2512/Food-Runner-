@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ycr1irg61ysy"]
+
+[ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="1_okqfl"]
+[ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="2_107ot"]
+[ext_resource type="Script" uid="uid://sdnosuy0paw4" path="res://spring_arm_pivort.gd" id="2_hn5ld"]
+[ext_resource type="Script" uid="uid://beredvmxj3jmo" path="res://camera_follow.gd" id="4_7eb8v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ra883"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+radius = 0.3
+
+[node name="Player" type="CharacterBody3D" unique_id=1412401694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31059027, 0)
+collision_layer = 2
+script = ExtResource("1_okqfl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=43763563]
+transform = Transform3D(2.1000843, 0, 0, 0, 3.257844, 0, 0, 0, 2.7592766, 0, -0.043664932, 0)
+mesh = SubResource("CapsuleMesh_kpjcp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1727370997]
+transform = Transform3D(4.276107, 0, 0, 0, 3.0349197, 0, 0, 0, 3.5679193, 0, 0.15849876, 0)
+shape = SubResource("CapsuleShape3D_ra883")
+
+[node name="SpringArmPivort" type="Node3D" parent="." unique_id=668737613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3570836, 0)
+top_level = true
+script = ExtResource("2_hn5ld")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivort" unique_id=538770569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3570836, 0)
+top_level = true
+shape = SubResource("SphereShape3D_g4v7s")
+script = ExtResource("2_107ot")
+
+[node name="SpringPossition" type="Node3D" parent="SpringArmPivort/SpringArm3D" unique_id=316026420]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivort" unique_id=1582987903 node_paths=PackedStringArray("spring_arm")]
+transform = Transform3D(0.93667215, -0.027754946, 0.3491059, 0, 0.99685454, 0.07925287, -0.35020745, -0.07423396, 0.9337259, 0, 0, 0)
+script = ExtResource("4_7eb8v")
+spring_arm = NodePath("../SpringArm3D/SpringPossition")
+lerp_power = 6.0
