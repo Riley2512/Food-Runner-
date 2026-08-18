@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Food Runner"
-run/main_scene="uid://xwk7drro2y2q"
+run/main_scene="uid://b67h3f32qvd6r"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/load_shell_environment=true
 config/icon="res://icon.svg"

@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://gm5unbfsq4m"]
+[gd_scene format=3 uid="uid://cgg1uv147na7y"]
 
-[ext_resource type="Script" uid="uid://sdnosuy0paw4" path="res://spring_arm_pivort.gd" id="1_i3pqv"]
-[ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="2_onrkg"]
-[ext_resource type="Script" uid="uid://beredvmxj3jmo" path="res://camera_follow.gd" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://sdnosuy0paw4" path="res://spring_arm_pivort.gd" id="1_nobey"]
+[ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="2_ixfi0"]
+[ext_resource type="Script" uid="uid://beredvmxj3jmo" path="res://camera_follow.gd" id="3_2hkd7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
 
@@ -26,19 +26,19 @@ shape = SubResource("CapsuleShape3D_ra883")
 [node name="SpringArmPivort" type="Node3D" parent="." unique_id=668737613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3570836, 0)
 top_level = true
-script = ExtResource("1_i3pqv")
+script = ExtResource("1_nobey")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivort" unique_id=538770569]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3570836, 0)
 top_level = true
 shape = SubResource("SphereShape3D_g4v7s")
-script = ExtResource("2_onrkg")
+script = ExtResource("2_ixfi0")
 
 [node name="SpringPossition" type="Node3D" parent="SpringArmPivort/SpringArm3D" unique_id=316026420]
 transform = Transform3D(1, 0, 0, 0, 0.9761265, -0.21720287, 0, 0.21720287, 0.9761265, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivort" unique_id=1582987903 node_paths=PackedStringArray("spring_arm")]
 transform = Transform3D(-0.012476258, 0.059718654, -0.99813724, -0.0025927806, 0.99820966, 0.059755392, 0.9999188, 0.0033334761, -0.012299091, -5.5900197, -0.58746505, 1.4305115e-06)
-script = ExtResource("3_hqtel")
+script = ExtResource("3_2hkd7")
 spring_arm = NodePath("../SpringArm3D/SpringPossition")
 lerp_power = 6.0
