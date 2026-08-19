@@ -10,14 +10,20 @@ var is_dead = false
 @onready var progress_bar: ProgressBar = $"../EnmeySpawner/CollisionShape3D/CanvasLayer/ProgressBar"
 @onready var timer = $"../Timer"
 
+func _ready():
+	if progress_bar == null:
+		push_error("progress_bar not found! Check the node path: " +
+			"../EnmeySpawner/CollisionShape3D/CanvasLayer/ProgressBar " +
+			"(is 'EnmeySpawner' a typo for 'EnemySpawner'?)")
+	if timer == null:
+		push_error("timer not found! Check the node path: ../Timer")
+
 func _physics_process(delta):
 	if is_dead:
 		return
-
-	if progress_bar.value <= 0:
+	if progress_bar and progress_bar.value <= 0:
 		die()
 		return
-
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	else:
@@ -30,7 +36,6 @@ func _physics_process(delta):
 	# or normalize() a (near) zero vector.
 	var direction = next_location - current_location
 	direction.y = 0
-
 	if direction.length() > 0.01:
 		var new_velocity = direction.normalized() * speed
 		velocity.x = move_toward(velocity.x, new_velocity.x, 0.25)
@@ -53,12 +58,13 @@ func set_target(target):
 	nav.target_position = target
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and timer:
 		timer.start()
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and timer:
 		timer.stop()
 
 func _on_timer_timeout():
-	progress_bar.value -= 10
+	if progress_bar:
+		progress_bar.value -= 10

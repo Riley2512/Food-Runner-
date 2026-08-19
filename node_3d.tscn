@@ -1,7 +1,42 @@
 [gd_scene format=3 uid="uid://bdp0yn08amij0"]
 
-[ext_resource type="PackedScene" uid="uid://gm5unbfsq4m" path="res://Player.tscn" id="1_a202f"]
-[ext_resource type="PackedScene" uid="uid://bd73b8gh51pqo" path="res://menu.tscn" id="2_r3fl7"]
+[ext_resource type="Script" uid="uid://d32g5j3sb4mtg" path="res://3d_level.gd" id="1_i5arm"]
+[ext_resource type="PackedScene" uid="uid://cchgy4xkc240x" path="res://player2.tscn" id="2_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://dwkppxpgb7eqc" path="res://enmey.tscn" id="3_jsk3o"]
+[ext_resource type="PackedScene" uid="uid://cnu4sqhpp4lqp" path="res://play_spawner.tscn" id="4_4arys"]
+[ext_resource type="PackedScene" uid="uid://b6l3avbtelof" path="res://enmey_spawner.tscn" id="5_6iypd"]
+[ext_resource type="PackedScene" uid="uid://dnkpasieqf5qw" path="res://enmey2.tscn" id="6_tereu"]
+
+[sub_resource type="GDScript" id="GDScript_88l8q"]
+script/source = "extends CharacterBody3D
+
+
+const SPEED = 5.0
+const JUMP_VELOCITY = 4.5
+
+
+func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+	move_and_slide()
+"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +52,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvy5o"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_kfcwk"]
 size = Vector2(20, 20)
@@ -24,67 +60,32 @@ size = Vector2(20, 20)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wvy5o"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
-[sub_resource type="GDScript" id="GDScript_wvy5o"]
-script/source = "extends CharacterBody3D
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const MOUSE_SENSITIVITY = 0.003
-
-var gravity: float = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
-
-@onready var camera: Camera3D = $Head/FirstPerson
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	if Input.is_action_just_pressed(\"jump\") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var input_dir := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
-"
-
 [sub_resource type="PrismMesh" id="PrismMesh_wvy5o"]
 
-[sub_resource type="GDScript" id="GDScript_noarx"]
-script/source = "extends Node3D
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yf5fn"]
+height = 15.113647
+radius = 16.274414
 
-func resume():
-	get_tree().paused = false
-func pause():
-	get_tree().paused = true
-func testEsc():
-	if Input.is_action_just_pressed(\"esc\") and get_tree().paused == false:
-		pause()
-	elif Input.is_action_just_pressed(\"esc\") and get_tree().paused == true:
-		resume()
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(1, 0.30401003, 0.3919419, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.22483963, 0.823534, 0, 1)
 
-func _on_resume_pressed() -> void:
-		resume()
+[node name="Node3D" type="Node3D" unique_id=1937742022]
+script = ExtResource("1_i5arm")
 
-
-func _on_restart_pressed() -> void:
-	get_tree().reload_current_scene()
-
-func _on_quit_pressed() -> void:
-	get_tree().quit()
-"
-
-[node name="World" type="Node3D" unique_id=1937742022]
+[node name="Player" parent="." unique_id=1412401694 instance=ExtResource("2_wc5p8")]
+script = SubResource("GDScript_88l8q")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -94,7 +95,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1541946106]
-transform = Transform3D(31.599434, 0, 0, 0, 1.2745112, 0, 0, 0, 30.872763, -30.989487, -66.697, -9.084351)
+transform = Transform3D(31.599434, 0, 0, 0, 1.2745112, 0, 0, 0, 30.872763, -30.9894, -66.75136, 2.8442955)
 material_override = SubResource("StandardMaterial3D_wvy5o")
 mesh = SubResource("PlaneMesh_kfcwk")
 
@@ -103,21 +104,41 @@ mesh = SubResource("PlaneMesh_kfcwk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=102598763]
 shape = SubResource("ConcavePolygonShape3D_wvy5o")
 
-[node name="Player" parent="." unique_id=1412401694 instance=ExtResource("1_a202f")]
-transform = Transform3D(0.9999969, -0.0023426986, -0.00078352547, 0.0023405799, 0.9999936, -0.002684913, 0.0007898319, 0.002683065, 0.99999607, 0, -8.818602, 0)
-script = SubResource("GDScript_wvy5o")
-
-[node name="Neck" type="Node3D" parent="Player" unique_id=1505775033]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.95172, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=2079347371]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1380218773]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.474586, 0)
 mesh = SubResource("PrismMesh_wvy5o")
 
-[node name="GridMap" type="GridMap" parent="." unique_id=884494972]
-metadata/_editor_floor_ = Vector3(0, 4, 0)
+[node name="Enmey" parent="." unique_id=2145365595 instance=ExtResource("3_jsk3o")]
+transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, -5.179159, -64.74399, 0)
 
-[node name="Node3D" parent="GridMap" unique_id=144042345 instance=ExtResource("2_r3fl7")]
-script = SubResource("GDScript_noarx")
+[node name="NavigationAgent3D2" type="NavigationAgent3D" parent="Enmey" unique_id=695351154]
+
+[node name="Area3D" type="Area3D" parent="Enmey" unique_id=1707365375]
+
+[node name="Play_Spawner" parent="." unique_id=940329098 instance=ExtResource("4_4arys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.338062, -41.065765, -1.8134766)
+
+[node name="EnmeySpawner" parent="." unique_id=1949282976 instance=ExtResource("5_6iypd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -44.099674, 0)
+enemies = Array[PackedScene]([ExtResource("6_tereu")])
+nextWaveTime = 10.5
+maxWaves = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnmeySpawner" unique_id=61021993]
+transform = Transform3D(-4.2822847, 0, 0, 0, -0.34755838, 0, 0, 0, 4.8103204, -10.140377, -22.26131, -3.3787918)
+shape = SubResource("CylinderShape3D_yf5fn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="EnmeySpawner/CollisionShape3D" unique_id=547010581]
+
+[node name="Health bar" type="ProgressBar" parent="EnmeySpawner/CollisionShape3D/CanvasLayer" unique_id=2034668836]
+offset_right = 223.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_g4v7s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yf5fn")
+value = 100.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="." unique_id=26013020]
+one_shot = true
+
+[connection signal="body_entered" from="Enmey/Area3D" to="Enmey" method="_on_area_3d_body_entered"]

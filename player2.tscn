@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cchgy4xkc240x"]
 
-[ext_resource type="Script" uid="uid://bx3kytn7se0vl" path="res://player.gd" id="1_tj0vx"]
 [ext_resource type="Script" uid="uid://sdnosuy0paw4" path="res://spring_arm_pivort.gd" id="2_bhnal"]
 [ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="3_uqwy3"]
 [ext_resource type="Script" uid="uid://beredvmxj3jmo" path="res://camera_follow.gd" id="4_8caby"]
@@ -15,7 +14,6 @@ radius = 0.3
 [node name="Player" type="CharacterBody3D" unique_id=1412401694]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31059027, 0)
 collision_layer = 2
-script = ExtResource("1_tj0vx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=43763563]
 transform = Transform3D(2.1000843, 0, 0, 0, 3.257844, 0, 0, 0, 2.7592766, 0, -0.043664932, 0)
@@ -37,9 +35,10 @@ shape = SubResource("SphereShape3D_g4v7s")
 script = ExtResource("3_uqwy3")
 
 [node name="SpringPossition" type="Node3D" parent="SpringArmPivort/SpringArm3D" unique_id=316026420]
+transform = Transform3D(1, 0, 0, 0, 0.9761265, -0.21720287, 0, 0.21720287, 0.9761265, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivort" unique_id=1582987903 node_paths=PackedStringArray("spring_arm")]
-transform = Transform3D(0.93667215, -0.027754946, 0.3491059, 0, 0.99685454, 0.07925287, -0.35020745, -0.07423396, 0.9337259, 0, 0, 0)
+transform = Transform3D(-0.0045118188, 0.08043782, -0.99674946, 0.0014702036, 0.99675906, 0.08043194, 0.99998873, -0.0011025304, -0.0046154563, -4.8665705, -0.51757115, -0.21419078)
 script = ExtResource("4_8caby")
 spring_arm = NodePath("../SpringArm3D/SpringPossition")
 lerp_power = 6.0
