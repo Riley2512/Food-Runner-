@@ -1,6 +1,30 @@
 [gd_scene format=3 uid="uid://dwkppxpgb7eqc"]
 
-[ext_resource type="Script" uid="uid://bxvwtbe72uqdt" path="res://Enmey2.gd" id="1_ae27s"]
+[sub_resource type="GDScript" id="GDScript_r0x5m"]
+script/source = "extends CharacterBody3D
+
+@export var MoveSpeed: float = 4.0 
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+
+var player: CharacterBody3D = null
+
+func _ready() -> void:
+	process_move()
+
+func process_move() -> void:
+	player = get_tree().get_nodes_in_group(\"Player\")[0]
+	
+func _physics_process(delta: float) -> void:
+	navigation_agent.set_target_position(player.global_position)
+	
+	if navigation_agent.is_navigation_finished():
+		return
+		
+	var next_position: Vector3 = navigation_agent.get_next_path_position()
+	velocity = global_position.direction_to(next_position) * MoveSpeed
+	
+	move_and_slide()
+"
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ub03x"]
 
@@ -13,7 +37,7 @@ data = PackedVector3Array(0, 1, 0, 0, 1, 0, 0, 0.9924, -0.086799994, 0, 1, 0, -0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
 [node name="Enmey" type="CharacterBody3D" unique_id=2145365595 groups=["Enemies"]]
-script = ExtResource("1_ae27s")
+script = SubResource("GDScript_r0x5m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1411124741]
 mesh = SubResource("CapsuleMesh_ub03x")
