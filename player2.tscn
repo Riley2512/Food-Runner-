@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://sdnosuy0paw4" path="res://spring_arm_pivort.gd" id="2_bhnal"]
 [ext_resource type="Script" uid="uid://cxxhismrgj705" path="res://spring_arm_3d.gd" id="3_uqwy3"]
 [ext_resource type="Script" uid="uid://beredvmxj3jmo" path="res://camera_follow.gd" id="4_8caby"]
+[ext_resource type="PackedScene" uid="uid://b8ykfcrvfl1c" path="res://Compoments/health_compoment.tscn" id="4_tj0vx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
 
@@ -42,3 +43,10 @@ transform = Transform3D(-0.117802426, -0.06731009, -0.99075323, 0, 0.99770015, -
 script = ExtResource("4_8caby")
 spring_arm = NodePath("../SpringArm3D/SpringPossition")
 lerp_power = 6.0
+
+[node name="HealthCompoment" parent="." unique_id=1593696937 instance=ExtResource("4_tj0vx")]
+maxHealth = 100.0
+
+[node name="HealthLbl" type="Label" parent="." unique_id=179771860]
+offset_right = 40.0
+offset_bottom = 23.0

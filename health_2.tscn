@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://den2gptmjd28m"]
+
+[ext_resource type="Script" uid="uid://c8e5uy6beohtd" path="res://health2.gd" id="1_uvpw7"]
+[ext_resource type="ArrayMesh" uid="uid://menfmvaysdr5" path="res://Asssets/Assets/obj/food_dinner.obj" id="2_l36r4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+radius = 0.72237164
+
+[node name="Health2" type="Area3D" unique_id=2140162285]
+script = ExtResource("1_uvpw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=814406786]
+mesh = ExtResource("2_l36r4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1518911995]
+transform = Transform3D(0.65907675, -0.021600958, 0, 0.013473324, 1.0566577, 0, 0, 0, 0.7468798, 0, 0.5204854, 0)
+shape = SubResource("SphereShape3D_g4v7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
