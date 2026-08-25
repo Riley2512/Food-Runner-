@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://c8x4n841a1ah6"]
+[gd_scene format=3 uid="uid://dtgdvf3ff5r32"]
 
-[ext_resource type="Script" path="res://food_pickup.gd" id="1_bydfv"]
-[ext_resource type="ArrayMesh" uid="uid://cch4t54jx1c2j" path="res://Asssets/Assets/obj/food_burger.obj" id="2_7e838"]
+[ext_resource type="Script" path="res://food_pickup.gd" id="1_5yvn0"]
+[ext_resource type="ArrayMesh" uid="uid://cch4t54jx1c2j" path="res://Asssets/Assets/obj/food_burger.obj" id="2_424ea"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
 
-[node name="health" type="Area3D" unique_id=317404163]
-script = ExtResource("1_bydfv")
+[node name="Burgur" type="Area3D" unique_id=317404163]
+script = ExtResource("1_5yvn0")
 collision_mask = 2
 heal_amount = 25.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1449340406]
-mesh = ExtResource("2_7e838")
+mesh = ExtResource("2_424ea")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=522746091]
 transform = Transform3D(1.116006, 0, 0, 0, 1.116006, 0, 0, 0, 1.116006, 0, 0.30788326, 0)

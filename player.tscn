@@ -20,7 +20,7 @@ transform = Transform3D(2.1000843, 0, 0, 0, 3.257844, 0, 0, 0, 2.7592766, 0, -0.
 mesh = SubResource("CapsuleMesh_kpjcp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1727370997]
-transform = Transform3D(4.276107, 0, 0, 0, 3.0349197, 0, 0, 0, 3.5679193, 0, 0.15849876, 0)
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0.15849876, 0)
 shape = SubResource("CapsuleShape3D_ra883")
 
 [node name="SpringArmPivort" type="Node3D" parent="." unique_id=668737613]

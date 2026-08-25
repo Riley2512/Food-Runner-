@@ -1,6 +1,9 @@
 extends Node
 
+class_name HealthComponent
 @export var maxHealth: float = 100.0
+
+signal died
 
 var health: float = maxHealth
 
@@ -12,9 +15,14 @@ func _ready() -> void:
 func damage(attack: Attack) -> void:
 	health -= attack.damage
 
-	var parent: Node3D = get_parent()
-	if parent.has_method("on_damage"):
-		parent.on_damage(attack)
-
 	if health <= 0:
-		get_parent().on_death()
+		died.emit()
+		var parent := get_parent()
+		if parent.has_method("on_death"):
+			parent.on_death()
+
+func take_damage(amount: float) -> void:
+	damage(Attack.new(amount, null))
+
+func heal(amount: float) -> void:
+	health = min(health + amount, maxHealth)

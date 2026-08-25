@@ -6,62 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cnu4sqhpp4lqp" path="res://play_spawner.tscn" id="4_2vekm"]
 [ext_resource type="PackedScene" uid="uid://b6l3avbtelof" path="res://enmey_spawner.tscn" id="5_yx171"]
 [ext_resource type="PackedScene" uid="uid://dnkpasieqf5qw" path="res://enmey2.tscn" id="6_yhmtn"]
-
-[sub_resource type="GDScript" id="GDScript_88l8q"]
-script/source = "extends CharacterBody3D
-
-@onready var health_compoment: HealthComponent = $HealthCompoment
-@onready var health_lbl: Label = $HealthLbl  # <- update path/name to match your scene
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
-var is_dead = false
-
-signal died
-
-func _ready():
-	health_compoment.health = health_compoment.maxHealth
-
-func _physics_process(delta: float) -> void:
-	if is_dead:
-		return
-
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var input_dir := Input.get_vector(\"left\", \"right\", \"forward\", \"back\")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	if health_lbl:
-		health_lbl.text = str(health_compoment.health)
-	move_and_slide()
-
-func on_damage(attack: Attack) -> void:
-	if is_dead:
-		return
-	if health_compoment.health <= 0:
-		die()
-
-func die():
-	is_dead = true
-	print(\"player dead\")
-	died.emit()
-	# add respawn / game over logic here
-
-func on_death() -> void:
-	get_tree().quit()
-"
+[ext_resource type="PackedScene" uid="uid://dtgdvf3ff5r32" path="res://burgur.tscn" id="7_burgur"]
+[ext_resource type="PackedScene" uid="uid://cdm0mtok3sd0x" path="res://meat.tscn" id="8_meat"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -110,7 +56,12 @@ bg_color = Color(0.22483963, 0.823534, 0, 1)
 script = ExtResource("1_r0x5m")
 
 [node name="Player" parent="." unique_id=1412401694 instance=ExtResource("2_3mrqo")]
-script = SubResource("GDScript_88l8q")
+
+[node name="Burgur" parent="." unique_id=317404163 instance=ExtResource("7_burgur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
+
+[node name="Meat" parent="." unique_id=2140162285 instance=ExtResource("8_meat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -3)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -134,7 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.474586, 0)
 mesh = SubResource("PrismMesh_wvy5o")
 
 [node name="Enmey" parent="." unique_id=2145365595 instance=ExtResource("3_joorw")]
-transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, -5.179159, -64.74399, 0)
+transform = Transform3D(2.0, 0, 0, 0, 2.0, 0, 0, 0, 2.0, -5.179159, -64.74399, 0)
 
 [node name="NavigationAgent3D2" type="NavigationAgent3D" parent="Enmey" unique_id=695351154]
 
