@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cnu4sqhpp4lqp" path="res://play_spawner.tscn" id="4_54rhr"]
 [ext_resource type="PackedScene" uid="uid://c8x4n841a1ah6" path="res://health.tscn" id="5_i53lu"]
 [ext_resource type="PackedScene" uid="uid://den2gptmjd28m" path="res://health_2.tscn" id="6_1mkx7"]
+[ext_resource type="Script" path="res://food_spawner.gd" id="7_food_spawner"]
+[ext_resource type="PackedScene" uid="uid://dtgdvf3ff5r32" path="res://burgur.tscn" id="8_burgur"]
+[ext_resource type="PackedScene" uid="uid://cdm0mtok3sd0x" path="res://meat.tscn" id="9_meat"]
+[ext_resource type="PackedScene" uid="uid://dujhadqchmrkt" path="res://pause_menu.tscn" id="10_pause_menu"]
+[ext_resource type="PackedScene" uid="uid://b6l3avbtelof" path="res://enmey_spawner.tscn" id="11_enemy_spawner"]
+[ext_resource type="PackedScene" uid="uid://dnkpasieqf5qw" path="res://enmey2.tscn" id="12_enemy"]
 
 [sub_resource type="GDScript" id="GDScript_88l8q"]
 script/source = "extends CharacterBody3D
@@ -86,11 +92,14 @@ size = Vector2(20, 20)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wvy5o"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health"]
+bg_color = Color(0.85, 0.08, 0.08, 1)
+
 [node name="Node3D2" type="Node3D" unique_id=1937742022]
 script = ExtResource("1_bio8t")
 
 [node name="Player" parent="." unique_id=1412401694 instance=ExtResource("2_1mkx7")]
-script = SubResource("GDScript_88l8q")
+transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -112,6 +121,12 @@ shape = SubResource("ConcavePolygonShape3D_wvy5o")
 [node name="Enmey" parent="." unique_id=2145365595 instance=ExtResource("3_ybpuh")]
 transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, -5.179159, -64.74399, 0)
 
+[node name="EnmeySpawner" parent="." unique_id=344195612 instance=ExtResource("11_enemy_spawner")]
+enemies = Array[PackedScene]([ExtResource("12_enemy")])
+nextWaveTime = 5.0
+enmemiesPerWave = 2
+spawn_area_size = Vector2(18, 18)
+
 [node name="NavigationAgent3D2" type="NavigationAgent3D" parent="Enmey" unique_id=695351154]
 
 [node name="Area3D" type="Area3D" parent="Enmey" unique_id=1707365375]
@@ -122,10 +137,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.338062, -41.065765, -1.813
 [node name="Timer" type="Timer" parent="." unique_id=26013020]
 one_shot = true
 
+[node name="FoodSpawner" type="Node3D" parent="." unique_id=344195608]
+script = ExtResource("7_food_spawner")
+burger_scene = ExtResource("8_burgur")
+meat_scene = ExtResource("9_meat")
+food_count = 2
+spawn_area_size = Vector2(18, 18)
+
 [node name="health" parent="." unique_id=317404163 instance=ExtResource("5_i53lu")]
 transform = Transform3D(2.4340591, 0, 0, 0, 2.9008093, 0, 0, 0, 2.3006172, -20.857412, -66.75136, 13.171263)
 
 [node name="Health2" parent="." unique_id=2140162285 instance=ExtResource("6_1mkx7")]
 transform = Transform3D(2.821721, 0, 0, 0, 1, 0, 0, 0, 2.9583611, -4.9276867, -66.75136, -12.093934)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=344195609]
+
+[node name="Healthbar" type="ProgressBar" parent="CanvasLayer" unique_id=344195610]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 270.0
+offset_bottom = 50.0
+max_value = 100.0
+value = 100.0
+show_percentage = false
+theme_override_styles/fill = SubResource("StyleBoxFlat_health")
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=344195611 instance=ExtResource("10_pause_menu")]
 
 [connection signal="body_entered" from="Enmey/Area3D" to="Enmey" method="_on_area_3d_body_entered"]

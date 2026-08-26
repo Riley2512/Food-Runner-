@@ -10,13 +10,16 @@ func _ready():
 
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://3DLevel.tscn")
+	get_tree().change_scene_to_file("res://MY Game.tscn")
 
 
 func _on_settings_pressed() -> void:
 	print("Settings pressed")
 	main_buttons.visible = false
 	options.visible = true
+
+func _on_settings_2_pressed() -> void:
+	_on_settings_pressed()
 
 
 func _on_exit_pressed() -> void:

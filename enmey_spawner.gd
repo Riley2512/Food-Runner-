@@ -4,6 +4,7 @@ extends Node3D
 @export var nextWaveTime: float = 2.5
 @export var enmemiesPerWave: int = 4
 @export var maxWaves := -1
+@export var spawn_area_size := Vector2(18, 18)
 @onready var timer: Timer = $Timer
 
 var currentWave = 0
@@ -11,6 +12,7 @@ var randomGenerator = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	randomGenerator.randomize()
 	timer.wait_time = nextWaveTime
 	timer.start()
 
@@ -27,17 +29,15 @@ func _on_timer_timeout() -> void:
 
 
 func _get_random_point():
-	var collisionShape: CollisionShape3D = get_child(-1)
-
-	if collisionShape.shape is BoxShape3D:
-		var halfSize = collisionShape.shape.size / 2
-		return collisionShape.global_position + _get_random_point_box_shape(halfSize)
-	elif collisionShape.shape is CylinderShape3D:
-		var radius = collisionShape.shape.radius
-		return collisionShape.global_position + _get_random_point_cylinder_shape(radius)
-	elif collisionShape.shape is SphereShape3D:
-		var radius = collisionShape.shape.radius
-		return collisionShape.global_position + _get_random_point_sphere_shape(radius)
+	var player := get_tree().get_first_node_in_group("player") as Node3D
+	var center := global_position
+	if player != null:
+		center = player.global_position
+	return center + Vector3(
+		randomGenerator.randf_range(-spawn_area_size.x / 2.0, spawn_area_size.x / 2.0),
+		0,
+		randomGenerator.randf_range(-spawn_area_size.y / 2.0, spawn_area_size.y / 2.0)
+	)
 
 
 func _get_random_point_box_shape(halfSize):

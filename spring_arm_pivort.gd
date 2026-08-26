@@ -6,17 +6,19 @@ extends Node3D
 
 @onready var spring_arm := $SpringArm3D
 
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		rotation.y -= event.relative.x * mouse_sensibilty
 		rotation.y = wrapf(rotation.y, 0.0, TAU)
 		
-		rotation.z -= event.relative.y * mouse_sensibilty
-		rotation.z = clamp(rotation.z, min_vertical_angle, max_vertical_angle)
+		rotation.x -= event.relative.y * mouse_sensibilty
+		rotation.x = clamp(rotation.x, min_vertical_angle, max_vertical_angle)
 		
 	if event.is_action_pressed("toggle_mouse_capture"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

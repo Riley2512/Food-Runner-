@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dnkpasieqf5qw" path="res://enmey2.tscn" id="6_yhmtn"]
 [ext_resource type="PackedScene" uid="uid://dtgdvf3ff5r32" path="res://burgur.tscn" id="7_burgur"]
 [ext_resource type="PackedScene" uid="uid://cdm0mtok3sd0x" path="res://meat.tscn" id="8_meat"]
+[ext_resource type="Script" path="res://food_spawner.gd" id="9_food_spawner"]
+[ext_resource type="PackedScene" uid="uid://dujhadqchmrkt" path="res://pause_menu.tscn" id="10_pause_menu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -56,12 +58,18 @@ bg_color = Color(0.22483963, 0.823534, 0, 1)
 script = ExtResource("1_r0x5m")
 
 [node name="Player" parent="." unique_id=1412401694 instance=ExtResource("2_3mrqo")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Burgur" parent="." unique_id=317404163 instance=ExtResource("7_burgur")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
+[node name="FoodSpawner" type="Node3D" parent="." unique_id=344195608]
+script = ExtResource("9_food_spawner")
+burger_scene = ExtResource("7_burgur")
+meat_scene = ExtResource("8_meat")
+food_count = 2
+spawn_area_size = Vector2(18, 18)
 
-[node name="Meat" parent="." unique_id=2140162285 instance=ExtResource("8_meat")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -3)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=344195609]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=344195611 instance=ExtResource("10_pause_menu")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")

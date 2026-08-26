@@ -13,6 +13,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="PauseMenu" type="Control" unique_id=1294053202]
 process_mode = 3
+mouse_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,6 +58,7 @@ layout_mode = 2
 
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1003224847]
 layout_mode = 2
+focus_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(-500, 0)
 text = "Resume"
@@ -65,6 +67,7 @@ metadata/_custom_type_script = "uid://bnesgv2yccqep"
 
 [node name="Restart" type="Button" parent="PanelContainer/VBoxContainer" unique_id=387220002]
 layout_mode = 2
+focus_mode = 2
 text = "Restart"
 script = ExtResource("3_05uyy")
 metadata/_custom_type_script = "uid://bnesgv2yccqep"
@@ -72,6 +75,7 @@ metadata/_custom_type_script = "uid://bnesgv2yccqep"
 [node name="Quit" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1377668359]
 process_mode = 3
 layout_mode = 2
+focus_mode = 2
 text = "Quit"
 script = ExtResource("3_05uyy")
 metadata/_custom_type_script = "uid://bnesgv2yccqep"

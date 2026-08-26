@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 @export var move_speed: float = 4.0
-@export var attack_range: float = 1.5
-@export var attack_cooldown: float = 1.0
+@export var attack_range: float = 2.5
+@export var attack_cooldown: float = 0.5
 @export var attack_damage: int = 10
 @export var gravity: float = 9.8
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if player == null:
+	if player == null or not is_instance_valid(player):
 		return
 
 	# Apply gravity so the enemy doesn't float
@@ -33,29 +33,26 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = 0.0
 
-	var distance_to_player: float = global_position.distance_to(player.global_position)
+	var horizontal_distance := Vector2(
+		global_position.x - player.global_position.x,
+		global_position.z - player.global_position.z
+	).length()
+	var vertical_distance := absf(global_position.y - player.global_position.y)
 
-	if distance_to_player <= attack_range:
+	if horizontal_distance <= attack_range and vertical_distance <= 3.0:
 		# Close enough — stop moving and attack
 		velocity.x = 0
 		velocity.y = velocity.y # keep gravity
 		velocity.z = 0
 		_try_attack(delta)
 	else:
-		navigation_agent.target_position = player.global_position
-
-		if not navigation_agent.is_navigation_finished():
-			var next_position: Vector3 = navigation_agent.get_next_path_position()
-			var direction: Vector3 = (next_position - global_position)
-			direction.y = 0
+		var direction: Vector3 = player.global_position - global_position
+		direction.y = 0
+		if direction.length() > 0.01:
 			direction = direction.normalized()
-
 			velocity.x = direction.x * move_speed
 			velocity.z = direction.z * move_speed
-
-			# Face the direction of movement
-			if direction.length() > 0.01:
-				look_at(global_position + direction, Vector3.UP)
+			look_at(global_position + direction, Vector3.UP)
 
 	move_and_slide()
 
@@ -70,5 +67,8 @@ func _try_attack(delta: float) -> void:
 func _do_attack() -> void:
 	if player.has_method("take_damage"):
 		player.take_damage(attack_damage)
-	else:
-		print("Enemy attacked player!")
+		return
+
+	var health_component := player.get_node_or_null("HealthCompoment") as HealthComponent
+	if health_component != null:
+		health_component.take_damage(attack_damage)

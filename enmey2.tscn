@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dnkpasieqf5qw"]
 
+[ext_resource type="Script" uid="uid://dr8nv0moyv5bi" path="res://enmey.gd" id="1_enemy_script"]
+
 [sub_resource type="GDScript" id="GDScript_r0x5m"]
 script/source = "extends CharacterBody3D
 
@@ -34,13 +36,17 @@ data = PackedVector3Array(0, 1, 0, 0, 1, 0, 0, 0.9924, -0.086799994, 0, 1, 0, -0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
 [node name="Enmey" type="CharacterBody3D" unique_id=2145365595 groups=["Enemies"]]
-script = SubResource("GDScript_r0x5m")
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_enemy_script")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1411124741]
 mesh = SubResource("CapsuleMesh_ub03x")
 surface_material_override/0 = SubResource("StandardMaterial3D_ae27s")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=340853448]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=701027731]
 shape = SubResource("ConcavePolygonShape3D_hhhcc")
