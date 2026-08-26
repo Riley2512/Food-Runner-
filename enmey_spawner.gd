@@ -18,9 +18,12 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
+	var player := get_tree().get_first_node_in_group("player") as Node3D
 	for i in enmemiesPerWave:
 		var randomEnmeyNode = enemies.pick_random().instantiate()
 		get_tree().current_scene.add_child(randomEnmeyNode)
+		if player:
+			randomEnmeyNode.scale = player.scale
 		randomEnmeyNode.global_position = _get_random_point()
 	currentWave += 1
 

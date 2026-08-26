@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djjqm05axu15m"
+path="res://.godot/imported/Modern6.wav-3fdbc5624a7ce0195f32b3a33f8bd84a.sample"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/WAV/Modern6.wav"
+dest_files=["res://.godot/imported/Modern6.wav-3fdbc5624a7ce0195f32b3a33f8bd84a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

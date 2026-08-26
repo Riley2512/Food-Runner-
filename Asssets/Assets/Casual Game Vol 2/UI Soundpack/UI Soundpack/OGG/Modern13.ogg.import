@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxjladgc4rcoy"
+path="res://.godot/imported/Modern13.ogg-5a98d9f7bb40bde17619fed1c36c2e0b.oggvorbisstr"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/OGG/Modern13.ogg"
+dest_files=["res://.godot/imported/Modern13.ogg-5a98d9f7bb40bde17619fed1c36c2e0b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

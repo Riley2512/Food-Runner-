@@ -6,6 +6,7 @@ const STAGGER := 0.06
 
 @onready var panel_container: PanelContainer = $PanelContainer
 @onready var v_box_container: VBoxContainer = $PanelContainer/VBoxContainer
+@onready var settings_menu: Control = $SettingsMenu
 
 var _buttons: Array[AnimatedButton] = []
 var _tween: Tween = null
@@ -18,6 +19,7 @@ func _ready() -> void:
 		if child is AnimatedButton: 
 			_buttons.append(child)
 	_restart()
+	settings_menu.visible = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"Escape"):
@@ -63,6 +65,11 @@ func _on_resume_pressed() -> void:
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
+func _on_settings_pressed() -> void:
+	panel_container.visible = false
+	settings_menu.visible = true
+	settings_menu.get_node("Panel/VBoxContainer/Back").grab_focus()
 
 func _on_quit_pressed() -> void:
 	get_tree().paused = false

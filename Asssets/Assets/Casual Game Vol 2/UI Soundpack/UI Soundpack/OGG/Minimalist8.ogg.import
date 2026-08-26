@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://byq3uqra1gxgt"
+path="res://.godot/imported/Minimalist8.ogg-1d9fccab1b5a8e330364558128f37c12.oggvorbisstr"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/OGG/Minimalist8.ogg"
+dest_files=["res://.godot/imported/Minimalist8.ogg-1d9fccab1b5a8e330364558128f37c12.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

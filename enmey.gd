@@ -7,11 +7,17 @@ extends CharacterBody3D
 @export var gravity: float = 9.8
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var health_component: HealthComponent = get_node_or_null("HealthCompoment")
+@onready var health_label: Label3D = get_node_or_null("HealthBar")
 
 var player: CharacterBody3D = null
 var attack_timer: float = 0.0
+var is_dead := false
 
 func _ready() -> void:
+	if health_component:
+		health_component.died.connect(on_death)
+		_update_health_bar()
 	# Wait a couple frames so the nav map is ready, not just one frame
 	await get_tree().physics_frame
 	await get_tree().physics_frame
@@ -24,7 +30,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if player == null or not is_instance_valid(player):
+	if is_dead or player == null or not is_instance_valid(player):
 		return
 
 	# Apply gravity so the enemy doesn't float
@@ -72,3 +78,24 @@ func _do_attack() -> void:
 	var health_component := player.get_node_or_null("HealthCompoment") as HealthComponent
 	if health_component != null:
 		health_component.take_damage(attack_damage)
+
+func take_damage(amount: float, attacker: Node3D = null) -> void:
+	if is_dead or health_component == null:
+		return
+	health_component.damage(Attack.new(amount, attacker))
+	_update_health_bar()
+	if health_component.health <= 0:
+		on_death()
+
+func _update_health_bar() -> void:
+	if health_label == null or health_component == null:
+		return
+	var filled: int = clampi(ceili(health_component.health / health_component.maxHealth * 10.0), 0, 10)
+	health_label.text = "%d / %d\n[%s%s]" % [int(health_component.health), int(health_component.maxHealth), "|".repeat(filled), ".".repeat(10 - filled)]
+
+func on_death() -> void:
+	if is_dead:
+		return
+	is_dead = true
+	set_physics_process(false)
+	queue_free()

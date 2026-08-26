@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dnkpasieqf5qw"]
 
 [ext_resource type="Script" uid="uid://dr8nv0moyv5bi" path="res://enmey.gd" id="1_enemy_script"]
+[ext_resource type="PackedScene" uid="uid://b8ykfcrvfl1c" path="res://Compoments/health_compoment.tscn" id="2_health"]
 
 [sub_resource type="GDScript" id="GDScript_r0x5m"]
 script/source = "extends CharacterBody3D
@@ -55,3 +56,14 @@ shape = SubResource("ConcavePolygonShape3D_hhhcc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=341534322]
 shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="HealthCompoment" parent="." instance=ExtResource("2_health")]
+maxHealth = 100.0
+
+[node name="HealthBar" type="Label3D" parent="."]
+position = Vector3(0, 1.8, 0)
+billboard = 1
+font_size = 26
+outline_size = 8
+modulate = Color(1, 0.35, 0.35, 1)
+text = "HP [||||||||||]"

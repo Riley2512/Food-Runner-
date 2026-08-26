@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://nitay3lqw212"
+path="res://.godot/imported/African2.ogg-1d5ea90fa728bc5398453ea07b5bac12.oggvorbisstr"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/OGG/African2.ogg"
+dest_files=["res://.godot/imported/African2.ogg-1d5ea90fa728bc5398453ea07b5bac12.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

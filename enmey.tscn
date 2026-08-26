@@ -69,3 +69,11 @@ shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="HealthCompoment" parent="." unique_id=1593696937 instance=ExtResource("1_ae27s")]
 maxHealth = 100.0
+
+[node name="HealthBar" type="Label3D" parent="."]
+position = Vector3(0, 1.8, 0)
+billboard = 1
+font_size = 26
+outline_size = 8
+modulate = Color(1, 0.35, 0.35, 1)
+text = "HP [||||||||||]"

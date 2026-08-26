@@ -1,0 +1,41 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://knife.gd" id="1_knife"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blade"]
+albedo_color = Color(0.78, 0.82, 0.88, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_handle"]
+albedo_color = Color(0.12, 0.04, 0.02, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_blade"]
+size = Vector3(0.12, 0.04, 0.8)
+material = SubResource("StandardMaterial3D_blade")
+
+[sub_resource type="BoxMesh" id="BoxMesh_handle"]
+size = Vector3(0.18, 0.08, 0.45)
+material = SubResource("StandardMaterial3D_handle")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_knife"]
+size = Vector3(0.3, 0.2, 1.4)
+
+[node name="Knife" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_knife")
+
+[node name="Blade" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.12, -0.4)
+mesh = SubResource("BoxMesh_blade")
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.12, 0.2)
+mesh = SubResource("BoxMesh_handle")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.12, -0.1)
+shape = SubResource("BoxShape3D_knife")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

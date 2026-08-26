@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c5prwr2vkuis3"
+path="res://.godot/imported/Track 2 (Party Tonight).wav-ae08eae841a5acd077939589de3567c7.sample"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/Track 2 (Party Tonight).wav"
+dest_files=["res://.godot/imported/Track 2 (Party Tonight).wav-ae08eae841a5acd077939589de3567c7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bu2mi3kjjo4b7"
+path="res://.godot/imported/Modern12.mp3-a9bbcb5b4bfc80a42ca2555fff3535d6.mp3str"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/MP3/Modern12.mp3"
+dest_files=["res://.godot/imported/Modern12.mp3-a9bbcb5b4bfc80a42ca2555fff3535d6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

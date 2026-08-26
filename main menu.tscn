@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://dvlldcvvngncn" path="res://main_menu.gd" id="1_f0j1r"]
 [ext_resource type="FontFile" uid="uid://cjuxubs87yy4b" path="res://Asssets/Assets/gltf/Aloevera-OVoWO.ttf" id="2_f0j1r"]
 [ext_resource type="Script" uid="uid://bnesgv2yccqep" path="res://button.gd" id="3_qqwyt"]
+[ext_resource type="PackedScene" path="res://settings_menu.tscn" id="4_settings_menu"]
+[ext_resource type="AudioStream" uid="uid://kvwi0l30eeaa" path="res://Asssets/Assets/Casual Game Vol 2/Track 7 (Panorama).wav" id="6_5d0og"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1bvp3"]
 texture = ExtResource("1_bajiw")
@@ -23,7 +25,14 @@ bg_color = Color(1.6348723, 1.634871, 1.6348717, 1)
 
 [node name="Main menu" type="Control" unique_id=1045908022]
 layout_mode = 3
-anchors_preset = 0
+anchor_left = 0.44300002
+anchor_top = 0.703
+anchor_right = 0.44300002
+anchor_bottom = 0.703
+offset_left = -1086.336
+offset_top = -703.544
+offset_right = -1086.336
+offset_bottom = -703.544
 script = ExtResource("1_f0j1r")
 
 [node name="Background" type="Panel" parent="." unique_id=100583628]
@@ -34,9 +43,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 11.0
-offset_top = 16.0
-offset_right = 1298.0
-offset_bottom = 799.0
+offset_top = -435.0
+offset_right = 2530.0
+offset_bottom = 1504.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_1bvp3")
@@ -48,10 +57,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 345.0
-offset_top = 291.0
-offset_right = 797.0
-offset_bottom = 433.0
+offset_left = 869.0
+offset_top = 622.0
+offset_right = 1321.0
+offset_bottom = 764.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
@@ -76,7 +85,7 @@ theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
-text = "Options"
+text = "Settings"
 
 [node name="Button3" type="Button" parent="Main buttons" unique_id=409404664]
 layout_mode = 2
@@ -95,10 +104,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 356.0
-offset_top = 171.0
-offset_right = 839.0
-offset_bottom = 267.0
+offset_left = 920.0
+offset_top = 466.0
+offset_right = 1403.0
+offset_bottom = 562.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_f0j1r")
@@ -106,14 +115,15 @@ theme_override_font_sizes/font_size = 61
 text = "Food Runner"
 
 [node name="Options" type="Panel" parent="." unique_id=783590228]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 237.0
-offset_top = 157.0
-offset_right = 874.0
-offset_bottom = 588.0
+offset_left = 801.0
+offset_top = 494.0
+offset_right = 1438.0
+offset_bottom = 925.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -139,6 +149,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7dm0k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7dm0k")
 text = "Back"
+
+[node name="SettingsMenu" parent="." unique_id=911591329 instance=ExtResource("4_settings_menu")]
+visible = false
+layout_mode = 1
+offset_left = 1092.0
+offset_top = 698.0
+offset_right = 1092.0
+offset_bottom = 698.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SettingsMenu" unique_id=685031145]
+stream = ExtResource("6_5d0og")
+autoplay = true
 
 [connection signal="pressed" from="Main buttons/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Main buttons/Button2" to="." method="_on_settings_2_pressed"]

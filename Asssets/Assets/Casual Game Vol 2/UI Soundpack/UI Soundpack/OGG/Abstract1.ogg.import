@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dw2wyd3op805b"
+path="res://.godot/imported/Abstract1.ogg-c3a0b868b4369c5fd6942470d4edba1f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/OGG/Abstract1.ogg"
+dest_files=["res://.godot/imported/Abstract1.ogg-c3a0b868b4369c5fd6942470d4edba1f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

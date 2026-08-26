@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csd31ywpr5obs"
+path="res://.godot/imported/Minimalist12.mp3-63dd27ea8a37f973fddadb6915d7af79.mp3str"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/MP3/Minimalist12.mp3"
+dest_files=["res://.godot/imported/Minimalist12.mp3-63dd27ea8a37f973fddadb6915d7af79.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

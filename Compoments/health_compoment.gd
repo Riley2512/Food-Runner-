@@ -13,9 +13,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func damage(attack: Attack) -> void:
+	if health <= 0:
+		return
 	health -= attack.damage
 
 	if health <= 0:
+		health = 0
 		died.emit()
 		var parent := get_parent()
 		if parent.has_method("on_death"):

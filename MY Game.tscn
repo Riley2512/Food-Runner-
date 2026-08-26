@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://dujhadqchmrkt" path="res://pause_menu.tscn" id="10_pause_menu"]
 [ext_resource type="PackedScene" uid="uid://b6l3avbtelof" path="res://enmey_spawner.tscn" id="11_enemy_spawner"]
 [ext_resource type="PackedScene" uid="uid://dnkpasieqf5qw" path="res://enmey2.tscn" id="12_enemy"]
+[ext_resource type="PackedScene" path="res://settings_menu.tscn" id="13_settings_menu"]
+[ext_resource type="PackedScene" path="res://knife.tscn" id="14_knife"]
+[ext_resource type="Texture2D" uid="uid://dhnstslyva71t" path="res://knife_icon.svg" id="15_knife_icon"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kfcwk"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -40,11 +43,38 @@ data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0,
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health"]
 bg_color = Color(0.85, 0.08, 0.08, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inventory_slot"]
+bg_color = Color(0.08, 0.1, 0.12, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.5, 0.53, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_game_over"]
+bg_color = Color(0.05, 0.07, 0.09, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.65, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Node3D2" type="Node3D" unique_id=1937742022]
 script = ExtResource("1_bio8t")
 
 [node name="Player" parent="." unique_id=1412401694 instance=ExtResource("2_1mkx7")]
-transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, 0, 0, 0)
+transform = Transform3D(1.7340068, 0, 0, 0, 2.2901912, 0, 0, 0, 1.9697992, 0, -62.246246, 0)
+
+[node name="Knife" parent="." unique_id=1359610330 instance=ExtResource("14_knife")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -65.5, -2)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=821989912]
 environment = SubResource("Environment_d84xi")
@@ -104,6 +134,136 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_health")
 value = 100.0
 show_percentage = false
 
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=2113773858]
+offset_left = 20.0
+offset_top = 58.0
+offset_right = 250.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(1, 0.85, 0.55, 1)
+theme_override_font_sizes/font_size = 22
+text = "TIME  00:00"
+
+[node name="InventoryLabel" type="Label" parent="CanvasLayer" unique_id=278382855]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -125.0
+offset_right = 80.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "INVENTORY"
+horizontal_alignment = 1
+
+[node name="InventoryBar" type="HBoxContainer" parent="CanvasLayer" unique_id=1454580564]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -92.0
+offset_right = 34.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="Slot1" type="PanelContainer" parent="CanvasLayer/InventoryBar" unique_id=1592155965]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inventory_slot")
+
+[node name="KnifeIcon" type="TextureRect" parent="CanvasLayer/InventoryBar/Slot1" unique_id=1180937585]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("15_knife_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameOver" type="Control" parent="CanvasLayer" unique_id=126198050]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dimmer" type="ColorRect" parent="CanvasLayer/GameOver" unique_id=1977566529]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.01, 0.02, 0.03, 0.72)
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/GameOver" unique_id=1155109598]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -180.0
+offset_right = 190.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_game_over")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOver/Panel" unique_id=845506481]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=95241496]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65, 0.2, 1)
+theme_override_font_sizes/font_size = 38
+text = "RUN OVER"
+horizontal_alignment = 1
+
+[node name="FinalTime" type="Label" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=1624044432]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "FINAL TIME  00:00"
+horizontal_alignment = 1
+
+[node name="PlayAgain" type="Button" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=682441720]
+process_mode = 3
+layout_mode = 2
+text = "Play Again"
+
+[node name="Restart" type="Button" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=824761263]
+process_mode = 3
+layout_mode = 2
+text = "Restart"
+
+[node name="Settings" type="Button" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=1035249875]
+process_mode = 3
+layout_mode = 2
+text = "Settings"
+
+[node name="SettingsMenu" parent="CanvasLayer" unique_id=1281531635 instance=ExtResource("13_settings_menu")]
+visible = false
+
 [node name="PauseMenu" parent="CanvasLayer" unique_id=344195611 instance=ExtResource("10_pause_menu")]
+offset_left = -9.0
+offset_top = -1.0
+offset_right = -9.0
+offset_bottom = -1.0
 
 [connection signal="body_entered" from="Enmey/Area3D" to="Enmey" method="_on_area_3d_body_entered"]
+[connection signal="pressed" from="CanvasLayer/GameOver/Panel/VBoxContainer/PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver/Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

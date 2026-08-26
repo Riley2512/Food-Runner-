@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cnne8ir8mpcpr"
+path="res://.godot/imported/Retro3.mp3-d25626d2211e8658acd42650bbb305d7.mp3str"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/MP3/Retro3.mp3"
+dest_files=["res://.godot/imported/Retro3.mp3-d25626d2211e8658acd42650bbb305d7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

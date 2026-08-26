@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://g1w30bhflj4i"
+path="res://.godot/imported/Retro10.ogg-ffed2b4cf8a5e1aac5eea867bfdd1781.oggvorbisstr"
+
+[deps]
+
+source_file="res://Asssets/Assets/Casual Game Vol 2/UI Soundpack/UI Soundpack/OGG/Retro10.ogg"
+dest_files=["res://.godot/imported/Retro10.ogg-ffed2b4cf8a5e1aac5eea867bfdd1781.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
