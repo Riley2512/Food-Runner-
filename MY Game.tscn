@@ -217,7 +217,7 @@ anchor_bottom = 0.5
 offset_left = -190.0
 offset_top = -180.0
 offset_right = 190.0
-offset_bottom = 180.0
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_game_over")
@@ -244,11 +244,6 @@ process_mode = 3
 layout_mode = 2
 text = "Play Again"
 
-[node name="Restart" type="Button" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=824761263]
-process_mode = 3
-layout_mode = 2
-text = "Restart"
-
 [node name="Settings" type="Button" parent="CanvasLayer/GameOver/Panel/VBoxContainer" unique_id=1035249875]
 process_mode = 3
 layout_mode = 2
@@ -265,5 +260,4 @@ offset_bottom = -1.0
 
 [connection signal="body_entered" from="Enmey/Area3D" to="Enmey" method="_on_area_3d_body_entered"]
 [connection signal="pressed" from="CanvasLayer/GameOver/Panel/VBoxContainer/PlayAgain" to="." method="_on_play_again_pressed"]
-[connection signal="pressed" from="CanvasLayer/GameOver/Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver/Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

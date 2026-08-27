@@ -44,8 +44,8 @@ _data = {
 script = ExtResource("1_sb8jg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=389461550]
-position = Vector2(950.99994, 575)
-scale = Vector2(0.95199996, 0.81329566)
+position = Vector2(573.49994, 349)
+scale = Vector2(0.5824999, 0.4936351)
 texture = ExtResource("2_vltdc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1428613789]
